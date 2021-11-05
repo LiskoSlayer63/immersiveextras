@@ -11,7 +11,7 @@ import blusunrize.immersiveengineering.api.wires.redstone.CapabilityRedstoneNetw
 import blusunrize.immersiveengineering.api.wires.redstone.RedstoneNetworkHandler;
 import blusunrize.immersiveengineering.common.blocks.IEBaseTileEntity;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IStateBasedDirectional;
-import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IComparatorOverride;
+import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IRedstoneOutput;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IScrewdriverInteraction;
 import lizcraft.immersiveextras.ImmersiveExtras;
 import lizcraft.immersiveextras.common.IExtrasContent;
@@ -32,7 +32,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 
-public class AdvancedComparatorTileEntity extends IEBaseTileEntity implements ITickableTileEntity, IStateBasedDirectional, IScrewdriverInteraction, IComparatorOverride
+public class AdvancedComparatorTileEntity extends IEBaseTileEntity implements ITickableTileEntity, IStateBasedDirectional, IScrewdriverInteraction, IRedstoneOutput
 {
 	public static enum ComparatorMode 
 	{
@@ -257,8 +257,20 @@ public class AdvancedComparatorTileEntity extends IEBaseTileEntity implements IT
 	}
 
 	@Override
-	public int getComparatorInputOverride() 
+	public boolean canConnectRedstone(Direction side) 
 	{
-		return calculateRedstone();
+		return side != getFacing().getOpposite();
+	}
+
+	@Override
+	public int getStrongRSOutput(Direction side) 
+	{
+		return 0;
+	}
+
+	@Override
+	public int getWeakRSOutput(Direction side) 
+	{
+		return !isRSInput() && side != getFacing().getOpposite() ? calculateRedstone() : 0;
 	}
 }

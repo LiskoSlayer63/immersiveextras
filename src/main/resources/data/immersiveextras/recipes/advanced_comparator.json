@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PCP",
+    "CBI",
+	"PCP"
+  ],
+  "key": {
+    "P": {
+      "tag": "forge:plates/iron"
+    },
+    "C": {
+      "item": "minecraft:comparator"
+    },
+    "B": {
+      "item": "immersiveengineering:logic_circuit"
+    },
+    "I": {
+      "item": "immersiveengineering:connector_bundled"
+    }
+  },
+  "result": {
+    "item": "immersiveextras:advanced_comparator"
+  }
+}

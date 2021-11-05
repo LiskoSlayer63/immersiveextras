@@ -112,13 +112,11 @@ public class AdvancedComparatorTileEntity extends IEBaseTileEntity implements IT
 	{
 		setChanged();
 		
-		try 
-		{
-			globalNet.getLocalNet(worldPosition.relative(getFacing()))
-				.getHandler(RedstoneNetworkHandler.ID, RedstoneNetworkHandler.class)
-				.updateValues();
-		} 
-		finally {}
+		RedstoneNetworkHandler handler = globalNet.getLocalNet(worldPosition.relative(getFacing()))
+			.getHandler(RedstoneNetworkHandler.ID, RedstoneNetworkHandler.class);
+			
+		if (handler != null)
+			handler.updateValues();
 		
 		this.markContainingBlockForUpdate(null);
 		level.blockEvent(getBlockPos(), this.getBlockState().getBlock(), 254, 0);
@@ -134,13 +132,11 @@ public class AdvancedComparatorTileEntity extends IEBaseTileEntity implements IT
 	{
 		if (hasLevel() && !level.isClientSide && rsDirty)
 		{	
-			try 
-			{
-				globalNet.getLocalNet(worldPosition.relative(getFacing()))
-					.getHandler(RedstoneNetworkHandler.ID, RedstoneNetworkHandler.class)
-					.updateValues();
-			} 
-			finally {}
+			RedstoneNetworkHandler handler = globalNet.getLocalNet(worldPosition.relative(getFacing()))
+				.getHandler(RedstoneNetworkHandler.ID, RedstoneNetworkHandler.class);
+			
+			if (handler != null)
+				handler.updateValues();
 		}
 	}
 	

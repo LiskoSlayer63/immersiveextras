@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "immersiveextras:block/advanced_comparator_side",
+    "front": "immersiveengineering:block/metal_device/thermoelectric_gen_top",
+    "side": "immersiveextras:block/advanced_comparator_side",
+	"bottom": "immersiveextras:block/advanced_comparator_side"
+  }
+}

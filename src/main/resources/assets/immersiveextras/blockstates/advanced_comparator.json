@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "immersiveextras:block/advanced_comparator",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "immersiveextras:block/advanced_comparator"
+    },
+    "facing=south": {
+      "model": "immersiveextras:block/advanced_comparator",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "immersiveextras:block/advanced_comparator",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "immersiveextras:block/advanced_comparator",
+      "x": 90
+    },
+    "facing=down": {
+      "model": "immersiveextras:block/advanced_comparator",
+      "x": 270
+    }
+  }
+}

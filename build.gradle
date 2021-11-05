@@ -1,0 +1,148 @@
+buildscript {
+    repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+    }
+}
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+
+group= "lizcraft.immersiveextras"
+version = mod_version
+archivesBaseName = mod_name
+
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+
+println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+
+repositories {
+	maven {	name = "BlameJared";	url = "https://maven.blamejared.com/" }         // IE & CT Files
+	maven { name = "DVS1 Maven FS"; url = "https://dvs1.progwml6.com/files/maven" } // JEI & Tinkers Files
+	maven { url = 'https://maven.latmod.com/' }                                     // Needed for JEI
+	
+	//flatDir { dirs 'flatdir' }
+}
+
+minecraft {
+    mappings channel: "${mappings_type}", version: "${mappings_version}"
+	
+    runs {
+		client {
+			workingDirectory project.file('run')
+			property 'forge.logging.markers', ''
+			property 'forge.logging.console.level', 'info'
+			property 'fml.earlyprogresswindow', 'false'
+			property 'mixin.env.remapRefMap', 'true'
+			property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+			mods {
+				immersivepetroleum {
+					source sourceSets.main
+				}
+			}
+		}
+
+		server {
+			workingDirectory project.file('run')
+			property 'forge.logging.markers', ''
+			property 'forge.logging.console.level', 'info'
+			property 'fml.earlyprogresswindow', 'false'
+			property 'mixin.env.remapRefMap', 'true'
+			property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+			
+			arg '-nogui'
+			
+			mods {
+				immersivepetroleum {
+					source sourceSets.main
+				}
+			}
+		}
+
+		data {
+			workingDirectory project.file('run')
+			property 'forge.logging.markers', ''
+			property 'forge.logging.console.level', 'info'
+			property 'fml.earlyprogresswindow', 'false'
+			property 'mixin.env.remapRefMap', 'true'
+			property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+			
+			args '--mod', 'immersiveextras',
+				 '--all',
+				 '--output', file('src/generated/resources/'),
+				 '--validate',
+				 '--existing', sourceSets.main.resources.srcDirs[0],
+				 '--existing-mod', 'immersiveengineering'
+			
+			mods {
+				immersiveextras {
+					source sourceSets.main
+					source sourceSets.test
+				}
+			}
+		}
+	}
+}
+
+sourceSets {
+	main {
+		resources {
+			srcDirs = [
+				"$rootDir/src/main/resources",
+				"$rootDir/src/generated/resources"
+			]
+		}
+	}
+	datagen {
+		compileClasspath += main.compileClasspath
+		runtimeClasspath += main.runtimeClasspath
+		compileClasspath += main.output
+		runtimeClasspath += main.output
+	}
+}
+
+dependencies {
+	minecraft "net.minecraftforge:forge:${forge_version}"
+	
+	implementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:1.16.5-5.0.5-140")
+	//compile fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:1.16.5-5.0.5-140:api")
+	testImplementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:1.16.5-5.0.5-140:datagen")
+	
+	implementation fg.deobf(group: "com.blamejared.crafttweaker", name: "CraftTweaker-1.16.5", version: "7.1.0.103")
+	
+	runtimeOnly fg.deobf("mezz.jei:jei-1.16.5:7.6.4.88")
+	compileOnly fg.deobf("mezz.jei:jei-1.16.5:7.6.4.88:api")
+}
+
+jar {
+    manifest {
+        attributes([
+            "Specification-Title": mod_id,
+            "Specification-Vendor": "lizcraft",
+            "Specification-Version": "1", // We are version 1 of ourselves
+            "Implementation-Title": mod_name,
+            "Implementation-Version": mod_version,
+            "Implementation-Vendor" :"lizcraft",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar') 
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file:///${project.projectDir}/mcmodsrepo"
+        }
+    }
+}

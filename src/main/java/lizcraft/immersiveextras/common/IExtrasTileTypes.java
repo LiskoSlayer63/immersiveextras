@@ -7,6 +7,7 @@ import com.google.common.collect.ImmutableSet;
 
 import lizcraft.immersiveextras.ImmersiveExtras;
 import lizcraft.immersiveextras.common.blocks.AdvancedComparatorTileEntity;
+import lizcraft.immersiveextras.common.blocks.RedstoneThresholderTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -17,15 +18,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class IExtrasTileTypes 
 {
 	public static final DeferredRegister<TileEntityType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, ImmersiveExtras.MODID);
-	/*
-	// Multiblocks
-	public static final RegistryObject<TileEntityType<PumpjackTileEntity>> PUMP = register("pumpjack", PumpjackTileEntity::new, IPContent.Multiblock.pumpjack);
-	public static final RegistryObject<TileEntityType<DistillationTowerTileEntity>> TOWER = register("distillationtower", DistillationTowerTileEntity::new, IPContent.Multiblock.distillationtower);
-	public static final RegistryObject<TileEntityType<CokerUnitTileEntity>> COKER = register("cokerunit", CokerUnitTileEntity::new, IPContent.Multiblock.cokerunit);
-	public static final RegistryObject<TileEntityType<HydrotreaterTileEntity>> TREATER = register("hydrotreater", HydrotreaterTileEntity::new, IPContent.Multiblock.hydrotreater);
-	*/
+	
 	// Normal Blocks
 	public static final RegistryObject<TileEntityType<AdvancedComparatorTileEntity>> ADVANCED_COMPARATOR = REGISTER.register("advancedcomparator", makeType(AdvancedComparatorTileEntity::new, () -> IExtrasContent.advancedComparator));
+	public static final RegistryObject<TileEntityType<RedstoneThresholderTileEntity>> REDSTONE_THRESHOLDER = REGISTER.register("redstonethresholder", makeType(RedstoneThresholderTileEntity::new, () -> IExtrasContent.redstoneThresholder));
 	
 	private static <T extends TileEntity> Supplier<TileEntityType<T>> makeType(Supplier<T> create, Supplier<Block> valid)
 	{

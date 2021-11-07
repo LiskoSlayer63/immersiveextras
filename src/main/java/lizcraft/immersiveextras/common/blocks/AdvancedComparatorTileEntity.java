@@ -36,44 +36,25 @@ public class AdvancedComparatorTileEntity extends IEBaseTileEntity implements IT
 {
 	public static enum ComparatorMode 
 	{
-		MEDIAN,
-		SPLIT
+		AVERAGE,
+		SUM
 	}
 	
 	private final LazyOptional<RedstoneBundleConnection> redstoneCap = registerConstantCap(
 			new RedstoneBundleConnection()
 			{
 				@Override
-				public void updateInput(byte[] signals, ConnectionPoint cp, Direction side)
-				{
-					if(!level.isClientSide && SafeChunkUtils.isChunkSafe(level, worldPosition))
-					{
-						if (comparatorMode == ComparatorMode.SPLIT)
-						{
-							for (int i = 0; i < redstoneValues.size(); i++)
-								if (redstoneColors.get(i))
-									signals[i] = (byte)getMaxRSInput();
-							
-							rsDirty = false;
-						}
-					}
-				}
-				
-				@Override
 				public void onChange(ConnectionPoint cp, RedstoneNetworkHandler handler, Direction side)
 				{
-					if(!level.isClientSide && SafeChunkUtils.isChunkSafe(level, worldPosition))
+					if(!level.isClientSide && SafeChunkUtils.isChunkSafe(level, worldPosition) && side == getFacing())
 					{
-						if (comparatorMode == ComparatorMode.MEDIAN)
-						{
-							for (int i = 0; i < redstoneValues.size(); i++)
-								if (redstoneColors.get(i))
-									redstoneValues.set(i, handler.getValue(i));
+						for (int i = 0; i < redstoneValues.size(); i++)
+							if (redstoneColors.get(i))
+								redstoneValues.set(i, handler.getValue(i));
 							
-							setChanged();
-							markContainingBlockForUpdate(getBlockState());
-							level.updateNeighborsAt(worldPosition, getBlockState().getBlock());
-						}
+						setChanged();
+						markContainingBlockForUpdate(getBlockState());
+						level.updateNeighborsAt(worldPosition, getBlockState().getBlock());
 					}
 				}
 			}
@@ -81,19 +62,22 @@ public class AdvancedComparatorTileEntity extends IEBaseTileEntity implements IT
 	
 	public NonNullList<Boolean> redstoneColors = NonNullList.withSize(DyeColor.values().length, false);
 	public NonNullList<Byte> redstoneValues = NonNullList.withSize(DyeColor.values().length, (byte)0);
-	public ComparatorMode comparatorMode = ComparatorMode.MEDIAN;
+	public ComparatorMode comparatorMode = ComparatorMode.AVERAGE;
 	
 	protected GlobalWireNetwork globalNet;
-	protected boolean rsDirty = false;
+	private Direction oldFacing;
 	
 	public AdvancedComparatorTileEntity() 
 	{
 		super(IExtrasTileTypes.ADVANCED_COMPARATOR.get());
+
+		this.oldFacing = getFacing();
 	}
 	
 	protected int calculateRedstone()
 	{
 		int value = 0;
+		int powered = 0;
 		int count = 0;
 		
 		for (int i = 0; i < this.redstoneColors.size(); i++)
@@ -101,11 +85,15 @@ public class AdvancedComparatorTileEntity extends IEBaseTileEntity implements IT
 			if (this.redstoneColors.get(i))
 			{
 				value += this.redstoneValues.get(i);
+				powered += this.redstoneValues.get(i) > 0 ? 1 : 0;
 				count++;
 			}
 		}
 		
-		return count == 0 || value == 0 ? 0 : value / count;
+		if (this.comparatorMode == ComparatorMode.AVERAGE)
+			return count == 0 || value == 0 ? 0 : value / count;
+		else
+			return count == 0 || powered == 0 ? 0 : (int)Math.floor(((float)powered) / ((float)count) * (float)15);
 	}
 	
 	protected void updateAfterConfigure()
@@ -114,7 +102,7 @@ public class AdvancedComparatorTileEntity extends IEBaseTileEntity implements IT
 		
 		RedstoneNetworkHandler handler = globalNet.getLocalNet(worldPosition.relative(getFacing()))
 			.getHandler(RedstoneNetworkHandler.ID, RedstoneNetworkHandler.class);
-			
+				
 		if (handler != null)
 			handler.updateValues();
 		
@@ -122,21 +110,21 @@ public class AdvancedComparatorTileEntity extends IEBaseTileEntity implements IT
 		level.blockEvent(getBlockPos(), this.getBlockState().getBlock(), 254, 0);
 	}
 	
-	protected boolean isRSInput()
+	protected void resetRedstone()
 	{
-		return this.comparatorMode == ComparatorMode.SPLIT;
+		for (int i = 0; i < redstoneValues.size(); i++)
+			redstoneValues.set(i, (byte)0);
 	}
 	
 	@Override
 	public void tick()
 	{
-		if (hasLevel() && !level.isClientSide && rsDirty)
-		{	
-			RedstoneNetworkHandler handler = globalNet.getLocalNet(worldPosition.relative(getFacing()))
-				.getHandler(RedstoneNetworkHandler.ID, RedstoneNetworkHandler.class);
+		if (oldFacing != getFacing())
+		{
+			oldFacing = getFacing();
 			
-			if (handler != null)
-				handler.updateValues();
+			resetRedstone();
+			updateAfterConfigure();
 		}
 	}
 	
@@ -189,7 +177,7 @@ public class AdvancedComparatorTileEntity extends IEBaseTileEntity implements IT
 			this.comparatorMode = ComparatorMode.values()[message.getByte("comparatorMode")];
 		
 		if(message.contains("redstoneColor") && message.contains("redstoneValue"))
-			this.redstoneColors.set(message.getInt("redstoneColor"), message.getBoolean("redstoneValue"));
+			this.redstoneColors.set(message.getByte("redstoneColor"), message.getBoolean("redstoneValue"));
 		
 		updateAfterConfigure();
 	}
@@ -205,9 +193,17 @@ public class AdvancedComparatorTileEntity extends IEBaseTileEntity implements IT
 	}
 	
 	@Override
+	public void setLevelAndPosition(@Nonnull World worldIn, @Nonnull BlockPos pos)
+	{
+		super.setLevelAndPosition(worldIn, pos);
+		
+		globalNet = GlobalWireNetwork.getNetwork(worldIn);
+	}
+	
+	@Override
 	public int getRSInput(@Nonnull Direction side)
 	{
-		return this.isRSInput() && side != getFacing().getOpposite() ? super.getRSInput(side) : 0;
+		return 0;
 	}
 	
 	@Override
@@ -226,34 +222,15 @@ public class AdvancedComparatorTileEntity extends IEBaseTileEntity implements IT
 	}
 	
 	@Override
-	public void onNeighborBlockChange(BlockPos otherPos)
-	{
-		int oldRSIn = getMaxRSInput();
-		
-		super.onNeighborBlockChange(otherPos);
-		
-		if(isRSInput() && oldRSIn != getMaxRSInput())
-			rsDirty = true;
-	}
-	
-	@Override
-	public void setLevelAndPosition(@Nonnull World worldIn, @Nonnull BlockPos pos)
-	{
-		super.setLevelAndPosition(worldIn, pos);
-		
-		globalNet = GlobalWireNetwork.getNetwork(worldIn);
-	}
-	
-	@Override
 	public boolean canHammerRotate(Direction side, Vector3d hit, LivingEntity entity)
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean canRotate(Direction axis)
 	{
-		return false;
+		return true;
 	}
 
 	@Override
@@ -271,6 +248,6 @@ public class AdvancedComparatorTileEntity extends IEBaseTileEntity implements IT
 	@Override
 	public int getWeakRSOutput(Direction side) 
 	{
-		return !isRSInput() && side != getFacing().getOpposite() ? calculateRedstone() : 0;
+		return side != getFacing().getOpposite() ? calculateRedstone() : 0;
 	}
 }

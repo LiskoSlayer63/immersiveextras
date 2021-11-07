@@ -1,6 +1,5 @@
 package lizcraft.immersiveextras.client.gui;
 
-import blusunrize.immersiveengineering.api.Lib;
 import blusunrize.immersiveengineering.api.client.TextUtils;
 import blusunrize.immersiveengineering.client.ClientUtils;
 import blusunrize.immersiveengineering.client.gui.ClientTileScreen;
@@ -9,9 +8,9 @@ import blusunrize.immersiveengineering.client.gui.elements.GuiButtonBoolean;
 import blusunrize.immersiveengineering.client.gui.elements.GuiButtonState;
 import blusunrize.immersiveengineering.common.network.MessageTileSync;
 import lizcraft.immersiveextras.ImmersiveExtras;
+import lizcraft.immersiveextras.common.blocks.RedstoneThresholderTileEntity.ThresholdMode;
 import lizcraft.immersiveextras.common.IExtrasNetworkUtils.NetworkHandler;
-import lizcraft.immersiveextras.common.blocks.AdvancedComparatorTileEntity;
-import lizcraft.immersiveextras.common.blocks.AdvancedComparatorTileEntity.ComparatorMode;
+import lizcraft.immersiveextras.common.blocks.RedstoneThresholderTileEntity;
 import net.minecraft.client.util.InputMappings;
 import net.minecraft.client.util.InputMappings.Input;
 import net.minecraft.item.DyeColor;
@@ -30,9 +29,9 @@ import java.util.function.Consumer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 
-public class AdvancedComparatorScreen extends ClientTileScreen<AdvancedComparatorTileEntity> 
+public class RedstoneThresholderScreen extends ClientTileScreen<RedstoneThresholderTileEntity> 
 {
-	public AdvancedComparatorScreen(AdvancedComparatorTileEntity tileEntity, ITextComponent title) 
+	public RedstoneThresholderScreen(RedstoneThresholderTileEntity tileEntity, ITextComponent title) 
 	{
 		super(tileEntity, title);
 		
@@ -42,8 +41,8 @@ public class AdvancedComparatorScreen extends ClientTileScreen<AdvancedComparato
 
 	private static final ResourceLocation TEXTURE = IEContainerScreen.makeTextureLocation("redstone_configuration");
 
-	private GuiButtonState<ComparatorMode> buttonMode;
-	private GuiButtonBoolean[] colorButtons;
+	private GuiButtonState<ThresholdMode> buttonMode;
+	private GuiButtonBoolean[] powerButtons;
 	
 	@Override
 	public void init()
@@ -53,20 +52,20 @@ public class AdvancedComparatorScreen extends ClientTileScreen<AdvancedComparato
 		
 		this.buttons.clear();
 
-		buttonMode = new GuiButtonState<ComparatorMode>(guiLeft+41, guiTop+20, 18, 18, new StringTextComponent(""), new ComparatorMode[] { ComparatorMode.AVERAGE, ComparatorMode.SUM },
-				tileEntity.comparatorMode.ordinal(), TEXTURE, 176, 0, 1,
-				btn -> sendConfig("comparatorMode", btn.getNextState().ordinal())
+		buttonMode = new GuiButtonState<ThresholdMode>(guiLeft+41, guiTop+20, 18, 18, new StringTextComponent(""), new ThresholdMode[] { ThresholdMode.UPPER, ThresholdMode.LOWER },
+				tileEntity.thresholdMode.ordinal(), TEXTURE, 176, 0, 1,
+				btn -> sendConfig("thresholdMode", btn.getNextState().ordinal())
 		);
 		
 		this.addButton(buttonMode);
 
-		colorButtons = new GuiButtonBoolean[16];
-		for(int i = 0; i < colorButtons.length; i++)
+		powerButtons = new GuiButtonBoolean[15];
+		for(int i = 0; i < powerButtons.length; i++)
 		{
-			final DyeColor color = DyeColor.byId(i);
-			colorButtons[i] = buildColorButton(colorButtons, guiLeft+22+(i%4*14), guiTop+44+(i/4*14),
-					tileEntity.redstoneColors.get(i), color, btn -> sendColorConfig(color.getId(), btn.getNextState().booleanValue()));
-			this.addButton(colorButtons[i]);
+			final int power = i + 1;
+			powerButtons[i] = buildPowerButton(powerButtons, guiLeft+16+(i%5*14), guiTop+44+(i/5*14),
+					power <= tileEntity.thresholdValue, power, btn -> sendConfig("thresholdValue", power));
+			this.addButton(powerButtons[i]);
 		}
 	}
 	
@@ -74,14 +73,6 @@ public class AdvancedComparatorScreen extends ClientTileScreen<AdvancedComparato
 	{
 		CompoundNBT message = new CompoundNBT();
 		message.putByte(key, (byte)value);
-		NetworkHandler.sendToServer(new MessageTileSync(tileEntity, message));
-	}
-	
-	public void sendColorConfig(int color, boolean value)
-	{
-		CompoundNBT message = new CompoundNBT();
-		message.putByte("redstoneColor", (byte)color);
-		message.putBoolean("redstoneValue", value);
 		NetworkHandler.sendToServer(new MessageTileSync(tileEntity, message));
 	}
 	
@@ -98,23 +89,23 @@ public class AdvancedComparatorScreen extends ClientTileScreen<AdvancedComparato
 
 		if(buttonMode.isHovered())
 		{
-			tooltip.add(new TranslationTextComponent("gui." + ImmersiveExtras.MODID + ".advanced_comparator.mode.title"));
+			tooltip.add(new TranslationTextComponent("gui." + ImmersiveExtras.MODID + ".redstone_thresholder.mode.title"));
 			tooltip.add(TextUtils.applyFormat(
-					new TranslationTextComponent("gui." + ImmersiveExtras.MODID + ".advanced_comparator.mode." + buttonMode.getState().name() + ".name"),
+					new TranslationTextComponent("gui." + ImmersiveExtras.MODID + ".redstone_thresholder.mode." + buttonMode.getState().name() + ".name"),
 					TextFormatting.GRAY
 			));
 			tooltip.add(TextUtils.applyFormat(
-					new TranslationTextComponent("gui." + ImmersiveExtras.MODID + ".advanced_comparator.mode." + buttonMode.getState().name() + ".desc"),
+					new TranslationTextComponent("gui." + ImmersiveExtras.MODID + ".redstone_thresholder.mode." + buttonMode.getState().name() + ".desc"),
 					TextFormatting.GRAY, TextFormatting.ITALIC
 			));
 		}
 
-		for(int i = 0; i < colorButtons.length; i++)
-			if(colorButtons[i].isHovered())
+		for(int i = 0; i < powerButtons.length; i++)
+			if(powerButtons[i].isHovered())
 			{
-				tooltip.add(new TranslationTextComponent(Lib.GUI_CONFIG+"redstone_color"));
+				tooltip.add(new TranslationTextComponent("gui." + ImmersiveExtras.MODID + ".redstone_thresholder.power.title"));
 				tooltip.add(TextUtils.applyFormat(
-						new TranslationTextComponent("color.minecraft."+DyeColor.byId(i).getName()),
+						new TranslationTextComponent("gui." + ImmersiveExtras.MODID + ".redstone_thresholder.power.desc", i + 1),
 						TextFormatting.GRAY
 				));
 			}
@@ -136,12 +127,15 @@ public class AdvancedComparatorScreen extends ClientTileScreen<AdvancedComparato
 		return super.keyPressed(keyCode, scanCode, modifiers);
 	}
 
-	public static GuiButtonBoolean buildColorButton(GuiButtonBoolean[] buttons, int posX, int posY, boolean active, DyeColor color, Consumer<GuiButtonBoolean> onClick)
+	public static GuiButtonBoolean buildPowerButton(GuiButtonBoolean[] buttons, int posX, int posY, boolean active, int power, Consumer<GuiButtonBoolean> onClick)
 	{
 		return new GuiButtonBoolean(posX, posY, 12, 12, "", active,
 				TEXTURE, 194, 0, 1,
 				btn -> {
 					onClick.accept((GuiButtonBoolean)btn);
+					for (int i = 0; i < buttons.length; i++)
+						buttons[i].setStateByInt(i < power ? 1 : 0);
+					btn.setStateByInt(0);
 				})
 		{
 			@Override
@@ -156,7 +150,7 @@ public class AdvancedComparatorScreen extends ClientTileScreen<AdvancedComparato
 				super.render(transform, mouseX, mouseY, partialTicks);
 				if(this.visible)
 				{
-					int col = color.getColorValue();
+					int col = DyeColor.GREEN.getColorValue();
 					if(!getState())
 						col = ClientUtils.getDarkenedTextColour(col);
 					col = 0xff000000|col;

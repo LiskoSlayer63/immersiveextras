@@ -3,6 +3,7 @@ package lizcraft.immersiveextras.client;
 import lizcraft.immersiveextras.common.CommonProxy;
 import lizcraft.immersiveextras.common.IExtrasContent;
 import lizcraft.immersiveextras.common.blocks.AdvancedComparatorTileEntity;
+import lizcraft.immersiveextras.common.blocks.RedstoneThresholderTileEntity;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 //import blusunrize.lib.manual.Tree.InnerNode;
 import lizcraft.immersiveextras.ImmersiveExtras;
 import lizcraft.immersiveextras.client.gui.AdvancedComparatorScreen;
+import lizcraft.immersiveextras.client.gui.RedstoneThresholderScreen;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
@@ -51,7 +53,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void init()
 	{
-		//ClientRegistry.bindTileEntityRenderer(IPTileTypes.AUTOLUBE.get(), AutoLubricatorRenderer::new);
+		
 	}
 	
 	@Override
@@ -59,6 +61,9 @@ public class ClientProxy extends CommonProxy
 	{
 		if(guiId == IExtrasContent.GUIID_AdvancedComparator && tileEntity instanceof AdvancedComparatorTileEntity)
 			Minecraft.getInstance().setScreen(new AdvancedComparatorScreen((AdvancedComparatorTileEntity)tileEntity, tileEntity.getBlockState().getBlock().getName()));
+
+		if(guiId == IExtrasContent.GUIID_RedstoneThresholder && tileEntity instanceof RedstoneThresholderTileEntity)
+			Minecraft.getInstance().setScreen(new RedstoneThresholderScreen((RedstoneThresholderTileEntity)tileEntity, tileEntity.getBlockState().getBlock().getName()));
 	}
 	
 	/** ImmersiveExtras's Manual Category */

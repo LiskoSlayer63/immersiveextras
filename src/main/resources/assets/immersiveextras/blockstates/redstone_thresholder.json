@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "immersiveextras:block/redstone_thresholder",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "immersiveextras:block/redstone_thresholder"
+    },
+    "facing=south": {
+      "model": "immersiveextras:block/redstone_thresholder",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "immersiveextras:block/redstone_thresholder",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "immersiveextras:block/redstone_thresholder",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "immersiveextras:block/redstone_thresholder",
+      "x": 90
+    }
+  }
+}

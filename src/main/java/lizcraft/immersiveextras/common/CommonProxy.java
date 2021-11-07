@@ -18,8 +18,7 @@ public class CommonProxy{
 	
 	public void registerContainersAndScreens()
 	{
-		//GuiHandler.register(DistillationTowerTileEntity.class, new ResourceLocation(ImmersivePetroleum.MODID, "distillationtower"), DistillationTowerContainer::new);
-		//GuiHandler.register(CokerUnitTileEntity.class, new ResourceLocation(ImmersivePetroleum.MODID, "cokerunit"), CokerUnitContainer::new);
+		
 	}
 	
 	public void preInit() {}

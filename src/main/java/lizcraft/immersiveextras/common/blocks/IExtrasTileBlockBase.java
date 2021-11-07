@@ -11,6 +11,7 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
+
 public class IExtrasTileBlockBase<T extends TileEntity> extends IETileProviderBlock<T>
 {
 	public IExtrasTileBlockBase(String name, Supplier<TileEntityType<T>> tileType, Properties blockProps) 

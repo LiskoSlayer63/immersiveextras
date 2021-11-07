@@ -8,13 +8,13 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.block.material.PushReaction;
 import net.minecraftforge.common.ToolType;
 
-public class AdvancedComparatorBlock extends IExtrasTileBlockBase<AdvancedComparatorTileEntity>
+public class RedstoneThresholderBlock extends IExtrasTileBlockBase<RedstoneThresholderTileEntity>
 {
 	private static final Material material = new Material(MaterialColor.METAL, false, false, true, true, false, false, PushReaction.BLOCK);
 	
-	public AdvancedComparatorBlock() 
+	public RedstoneThresholderBlock() 
 	{
-		super("advanced_comparator", IExtrasTileTypes.ADVANCED_COMPARATOR,
+		super("redstone_thresholder", IExtrasTileTypes.REDSTONE_THRESHOLDER,
 				Block.Properties.of(material)
 				.strength(5.0F, 6.0F)
 				.harvestTool(ToolType.PICKAXE)

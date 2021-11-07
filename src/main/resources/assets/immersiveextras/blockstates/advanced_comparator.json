@@ -17,11 +17,11 @@
     },
     "facing=up": {
       "model": "immersiveextras:block/advanced_comparator",
-      "x": 90
+      "x": 270
     },
     "facing=down": {
       "model": "immersiveextras:block/advanced_comparator",
-      "x": 270
+      "x": 90
     }
   }
 }

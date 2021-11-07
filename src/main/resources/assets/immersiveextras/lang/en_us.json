@@ -1,3 +1,19 @@
 {
-	"block.immersiveextras.advanced_comparator": "Advanced Comparator"
+	"block.immersiveextras.advanced_comparator": "Advanced Comparator",
+	"block.immersiveextras.redstone_thresholder": "Redstone Thresholder",
+	
+	
+	"gui.immersiveextras.advanced_comparator.mode.title": "Comparator Mode",
+	"gui.immersiveextras.advanced_comparator.mode.AVERAGE.name": "Average Mode",
+	"gui.immersiveextras.advanced_comparator.mode.AVERAGE.desc": "Calculates average signal strength from selected inputs",
+	"gui.immersiveextras.advanced_comparator.mode.SUM.name": "Add Mode",
+	"gui.immersiveextras.advanced_comparator.mode.SUM.desc": "Counts how many signal are active from selected inputs",
+	
+	"gui.immersiveextras.redstone_thresholder.mode.title": "Threshold Mode",
+	"gui.immersiveextras.redstone_thresholder.mode.UPPER.name": "Upper Threshold",
+	"gui.immersiveextras.redstone_thresholder.mode.UPPER.desc": "Passes signal to output when it's strength reaches the threshold value",
+	"gui.immersiveextras.redstone_thresholder.mode.LOWER.name": "Lower Threshold",
+	"gui.immersiveextras.redstone_thresholder.mode.LOWER.desc": "Passes signal to output when it's strength drops below the threshold value",
+	"gui.immersiveextras.redstone_thresholder.power.title": "Threshold Value",
+	"gui.immersiveextras.redstone_thresholder.power.desc": "Signal strength: %s"
 }

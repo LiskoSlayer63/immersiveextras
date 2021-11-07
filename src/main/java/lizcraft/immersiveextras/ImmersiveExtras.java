@@ -3,13 +3,11 @@ package lizcraft.immersiveextras;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import lizcraft.immersiveextras.common.CommonEventHandler;
 import lizcraft.immersiveextras.common.CommonProxy;
 import lizcraft.immersiveextras.common.IExtrasContent;
 import lizcraft.immersiveextras.common.IExtrasTileTypes;
+import lizcraft.immersiveextras.common.IExtrasNetworkUtils;
 import lizcraft.immersiveextras.client.ClientProxy;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -29,7 +27,7 @@ public class ImmersiveExtras
 	public static ImmersiveExtras INSTANCE;
 	
 	public static CommonProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
-
+	
 	public ImmersiveExtras() 
 	{
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -61,8 +59,7 @@ public class ImmersiveExtras
 		// ---------------------------
 		
 		IExtrasContent.init();
-		
-		MinecraftForge.EVENT_BUS.register(new CommonEventHandler());
+		IExtrasNetworkUtils.init();
 		
 		proxy.init();
 		
@@ -89,11 +86,5 @@ public class ImmersiveExtras
 	public void serverStarted(FMLServerStartedEvent event)
 	{
 		proxy.serverStarted();
-		
-		ServerWorld world = event.getServer().getLevel(World.OVERWORLD);
-		if(!world.isClientSide())
-		{
-			
-		}
 	}	
 }

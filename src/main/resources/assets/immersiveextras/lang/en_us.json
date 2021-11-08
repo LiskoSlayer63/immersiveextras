@@ -1,6 +1,7 @@
 {
 	"block.immersiveextras.advanced_comparator": "Advanced Comparator",
 	"block.immersiveextras.redstone_thresholder": "Redstone Thresholder",
+	"block.immersiveextras.redstone_pulsecounter": "Redstone Pulse Counter",
 	
 	
 	"gui.immersiveextras.advanced_comparator.mode.title": "Comparator Mode",
@@ -15,5 +16,23 @@
 	"gui.immersiveextras.redstone_thresholder.mode.LOWER.name": "Lower Threshold",
 	"gui.immersiveextras.redstone_thresholder.mode.LOWER.desc": "Passes signal to output when it's strength drops below the threshold value",
 	"gui.immersiveextras.redstone_thresholder.power.title": "Threshold Value",
-	"gui.immersiveextras.redstone_thresholder.power.desc": "Signal strength: %s"
+	"gui.immersiveextras.redstone_thresholder.power.desc": "Signal strength: %s",
+	
+	"gui.immersiveextras.redstone_pulsecounter.directionMode.title": "Counting Mode",
+	"gui.immersiveextras.redstone_pulsecounter.directionMode.UP.name": "Count Up",
+	"gui.immersiveextras.redstone_pulsecounter.directionMode.UP.desc": "Raises the output signal strength by every pulse",
+	"gui.immersiveextras.redstone_pulsecounter.directionMode.DOWN.name": "Count Down",
+	"gui.immersiveextras.redstone_pulsecounter.directionMode.DOWN.desc": "Lowers the output signal strength by every pulse",
+	"gui.immersiveextras.redstone_pulsecounter.edgeMode.title": "Detection Mode",
+	"gui.immersiveextras.redstone_pulsecounter.edgeMode.RISING.name": "Rising Edge",
+	"gui.immersiveextras.redstone_pulsecounter.edgeMode.RISING.desc": "Counts a pulse when input signal goes from low to high",
+	"gui.immersiveextras.redstone_pulsecounter.edgeMode.FALLING.name": "Falling Edge",
+	"gui.immersiveextras.redstone_pulsecounter.edgeMode.FALLING.desc": "Counts a pulse when input signal goes from high to low",
+	"gui.immersiveextras.redstone_pulsecounter.loopMode.title": "Loop Mode",
+	"gui.immersiveextras.redstone_pulsecounter.loopMode.ENABLED.name": "Looping enabled",
+	"gui.immersiveextras.redstone_pulsecounter.loopMode.DISABLED.name": "Looping disabled",
+	"gui.immersiveextras.redstone_pulsecounter.power.title": "Counter Limit",
+	"gui.immersiveextras.redstone_pulsecounter.power.desc": "Max Count: %s",
+	"gui.immersiveextras.redstone_pulsecounter.reset.title": "Reset Counter",
+	"gui.immersiveextras.redstone_pulsecounter.reset.desc": "Resets the counter"
 }

@@ -3,6 +3,7 @@ package lizcraft.immersiveextras.client;
 import lizcraft.immersiveextras.common.CommonProxy;
 import lizcraft.immersiveextras.common.IExtrasContent;
 import lizcraft.immersiveextras.common.blocks.AdvancedComparatorTileEntity;
+import lizcraft.immersiveextras.common.blocks.RedstonePulseCounterTileEntity;
 import lizcraft.immersiveextras.common.blocks.RedstoneThresholderTileEntity;
 
 import org.apache.logging.log4j.LogManager;
@@ -12,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 //import blusunrize.lib.manual.Tree.InnerNode;
 import lizcraft.immersiveextras.ImmersiveExtras;
 import lizcraft.immersiveextras.client.gui.AdvancedComparatorScreen;
+import lizcraft.immersiveextras.client.gui.RedstonePulseCounterScreen;
 import lizcraft.immersiveextras.client.gui.RedstoneThresholderScreen;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraft.client.Minecraft;
@@ -27,7 +29,6 @@ public class ClientProxy extends CommonProxy
 {
 	@SuppressWarnings("unused")
 	private static final Logger log = LogManager.getLogger(ImmersiveExtras.MODID + "/ClientProxy");
-	public static final String CAT_IEXTRAS = "iextras";
 	
 	@Override
 	public void setup() {}
@@ -64,6 +65,9 @@ public class ClientProxy extends CommonProxy
 
 		if(guiId == IExtrasContent.GUIID_RedstoneThresholder && tileEntity instanceof RedstoneThresholderTileEntity)
 			Minecraft.getInstance().setScreen(new RedstoneThresholderScreen((RedstoneThresholderTileEntity)tileEntity, tileEntity.getBlockState().getBlock().getName()));
+
+		if(guiId == IExtrasContent.GUIID_RedstonePulseCounter && tileEntity instanceof RedstonePulseCounterTileEntity)
+			Minecraft.getInstance().setScreen(new RedstonePulseCounterScreen((RedstonePulseCounterTileEntity)tileEntity, tileEntity.getBlockState().getBlock().getName()));
 	}
 	
 	/** ImmersiveExtras's Manual Category */

@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "immersiveextras:block/redstone_pulsecounter",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "immersiveextras:block/redstone_pulsecounter"
+    },
+    "facing=south": {
+      "model": "immersiveextras:block/redstone_pulsecounter",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "immersiveextras:block/redstone_pulsecounter",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "immersiveextras:block/redstone_pulsecounter",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "immersiveextras:block/redstone_pulsecounter",
+      "x": 90
+    }
+  }
+}

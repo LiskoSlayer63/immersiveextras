@@ -51,7 +51,7 @@ public class AdvancedComparatorTileEntity extends IEBaseTileEntity implements IT
 						for (int i = 0; i < redstoneValues.size(); i++)
 							if (redstoneColors.get(i))
 								redstoneValues.set(i, handler.getValue(i));
-							
+						
 						setChanged();
 						markContainingBlockForUpdate(getBlockState());
 						level.updateNeighborsAt(worldPosition, getBlockState().getBlock());
@@ -122,7 +122,7 @@ public class AdvancedComparatorTileEntity extends IEBaseTileEntity implements IT
 		if (oldFacing != getFacing())
 		{
 			oldFacing = getFacing();
-			
+
 			resetRedstone();
 			updateAfterConfigure();
 		}

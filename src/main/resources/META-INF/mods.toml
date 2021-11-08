@@ -20,7 +20,7 @@ Adds some extra technology
 [[dependencies.immersiveextras]]
 	modId="immersiveengineering"
 	mandatory=true
-	versionRange="[1.16.5-5.0.4-139,)"
+	versionRange="[1.16.5-5.0.5-140,)"
 	ordering="BEFORE"
 	side="BOTH"
 

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "RCS",
+	"PBP"
+  ],
+  "key": {
+    "P": {
+      "tag": "forge:plates/iron"
+    },
+    "R": {
+      "tag": "forge:dusts/redstone"
+    },
+    "C": {
+      "item": "minecraft:comparator"
+    },
+    "B": {
+      "item": "immersiveengineering:logic_circuit"
+    },
+    "S": {
+      "tag": "minecraft:buttons"
+    }
+  },
+  "result": {
+    "item": "immersiveextras:redstone_pulsecounter"
+  }
+}

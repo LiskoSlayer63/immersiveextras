@@ -2,6 +2,8 @@
 	"block.immersiveextras.advanced_comparator": "Advanced Comparator",
 	"block.immersiveextras.redstone_thresholder": "Redstone Thresholder",
 	"block.immersiveextras.redstone_pulsecounter": "Redstone Pulse Counter",
+	"block.immersiveextras.redstone_pulsegenerator": "Redstone Pulse Generator",
+	"block.immersiveextras.redstone_channelswitcher": "Redstone Channel Switcher",
 	
 	
 	"gui.immersiveextras.advanced_comparator.mode.title": "Comparator Mode",
@@ -31,8 +33,27 @@
 	"gui.immersiveextras.redstone_pulsecounter.loopMode.title": "Loop Mode",
 	"gui.immersiveextras.redstone_pulsecounter.loopMode.ENABLED.name": "Looping enabled",
 	"gui.immersiveextras.redstone_pulsecounter.loopMode.DISABLED.name": "Looping disabled",
-	"gui.immersiveextras.redstone_pulsecounter.power.title": "Counter Limit",
-	"gui.immersiveextras.redstone_pulsecounter.power.desc": "Max Count: %s",
+	"gui.immersiveextras.redstone_pulsecounter.limit.title": "Counter Limit",
+	"gui.immersiveextras.redstone_pulsecounter.limit.desc": "Max Count: %s",
 	"gui.immersiveextras.redstone_pulsecounter.reset.title": "Reset Counter",
-	"gui.immersiveextras.redstone_pulsecounter.reset.desc": "Resets the counter"
+	"gui.immersiveextras.redstone_pulsecounter.reset.desc": "Resets the counter",
+	
+	"gui.immersiveextras.redstone_pulsegenerator.source.title": "Speed Control Mode",
+	"gui.immersiveextras.redstone_pulsegenerator.source.INTERNAL.name": "Internal",
+	"gui.immersiveextras.redstone_pulsegenerator.source.INTERNAL.desc": "Uses the internal selector to control speed",
+	"gui.immersiveextras.redstone_pulsegenerator.source.EXTERNAL.name": "External",
+	"gui.immersiveextras.redstone_pulsegenerator.source.EXTERNAL.desc": "Uses external redstone signal to control speed",
+	"gui.immersiveextras.redstone_pulsegenerator.speed.title": "Pulse Speed",
+	"gui.immersiveextras.redstone_pulsegenerator.speed.desc": "%s ticks per pulse",
+	
+	"gui.immersiveextras.redstone_channelswitcher.ioMode.title": "Interface Mode",
+	"gui.immersiveextras.redstone_channelswitcher.ioMode.INPUT.name": "Receive",
+	"gui.immersiveextras.redstone_channelswitcher.ioMode.INPUT.desc": "Receives the signal from the interface connector",
+	"gui.immersiveextras.redstone_channelswitcher.ioMode.OUTPUT.name": "Send",
+	"gui.immersiveextras.redstone_channelswitcher.ioMode.OUTPUT.desc": "Sends the signal to the interface connector",
+	"gui.immersiveextras.redstone_channelswitcher.controlMode.title": "Channel Control Mode",
+	"gui.immersiveextras.redstone_channelswitcher.controlMode.INTERNAL.name": "Internal",
+	"gui.immersiveextras.redstone_channelswitcher.controlMode.INTERNAL.desc": "Uses the internal selector to control channel",
+	"gui.immersiveextras.redstone_channelswitcher.controlMode.EXTERNAL.name": "External",
+	"gui.immersiveextras.redstone_channelswitcher.controlMode.EXTERNAL.desc": "Uses external redstone signal to control channel"
 }

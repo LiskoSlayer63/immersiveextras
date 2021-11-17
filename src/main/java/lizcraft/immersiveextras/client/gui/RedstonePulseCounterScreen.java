@@ -124,9 +124,9 @@ public class RedstonePulseCounterScreen extends IExtrasClientTileScreen<Redstone
 		for(int i = 0; i < powerButtons.length; i++)
 			if(powerButtons[i].isHovered())
 			{
-				tooltip.add(getTranslationComponent("power.title"));
+				tooltip.add(getTranslationComponent("limit.title"));
 				tooltip.add(TextUtils.applyFormat(
-						getTranslationComponent("power.desc", i + 1),
+						getTranslationComponent("limit.desc", i + 1),
 						TextFormatting.GRAY
 				));
 			}

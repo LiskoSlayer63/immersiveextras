@@ -108,6 +108,8 @@ public class AdvancedComparatorTileEntity extends IEBaseTileEntity implements IT
 		
 		this.markContainingBlockForUpdate(null);
 		level.blockEvent(getBlockPos(), this.getBlockState().getBlock(), 254, 0);
+		
+		redstoneCap.ifPresent(RedstoneBundleConnection::markDirty);
 	}
 	
 	protected void resetRedstone()
@@ -137,13 +139,7 @@ public class AdvancedComparatorTileEntity extends IEBaseTileEntity implements IT
 	@Override
 	public PlacementLimitation getFacingLimitation()
 	{
-		return PlacementLimitation.PISTON_LIKE;
-	}
-
-	@Override
-	public boolean mirrorFacingOnPlacement(LivingEntity placer)
-	{
-		return true;
+		return PlacementLimitation.SIDE_CLICKED;
 	}
 
 	@Override
@@ -224,13 +220,13 @@ public class AdvancedComparatorTileEntity extends IEBaseTileEntity implements IT
 	@Override
 	public boolean canHammerRotate(Direction side, Vector3d hit, LivingEntity entity)
 	{
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean canRotate(Direction axis)
 	{
-		return true;
+		return false;
 	}
 
 	@Override

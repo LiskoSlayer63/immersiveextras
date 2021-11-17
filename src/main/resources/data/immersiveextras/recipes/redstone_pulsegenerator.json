@@ -1,8 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "PIP",
-    "RCR",
+    "PPP",
+    "CRT",
 	"PBP"
   ],
   "key": {
@@ -10,19 +10,19 @@
       "tag": "forge:plates/iron"
     },
     "R": {
-      "tag": "forge:dusts/redstone"
+      "item": "minecraft:repeater"
     },
     "C": {
       "item": "minecraft:comparator"
     },
+    "T": {
+      "item": "minecraft:redstone_torch"
+    },
     "B": {
       "item": "immersiveengineering:logic_circuit"
-    },
-    "I": {
-      "item": "immersiveengineering:connector_bundled"
     }
   },
   "result": {
-    "item": "immersiveextras:advanced_comparator"
+    "item": "immersiveextras:redstone_pulsegenerator"
   }
 }

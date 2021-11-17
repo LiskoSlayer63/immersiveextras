@@ -5,7 +5,6 @@ import blusunrize.immersiveengineering.api.client.TextUtils;
 import blusunrize.immersiveengineering.client.ClientUtils;
 import blusunrize.immersiveengineering.client.gui.elements.GuiButtonBoolean;
 import blusunrize.immersiveengineering.client.gui.elements.GuiButtonState;
-import lizcraft.immersiveextras.ImmersiveExtras;
 import lizcraft.immersiveextras.common.blocks.AdvancedComparatorTileEntity;
 import lizcraft.immersiveextras.common.blocks.AdvancedComparatorTileEntity.ComparatorMode;
 import net.minecraft.item.DyeColor;
@@ -73,13 +72,13 @@ public class AdvancedComparatorScreen extends IExtrasClientTileScreen<AdvancedCo
 
 		if(buttonMode.isHovered())
 		{
-			tooltip.add(new TranslationTextComponent("gui." + ImmersiveExtras.MODID + ".advanced_comparator.mode.title"));
+			tooltip.add(getTranslationComponent("mode.title"));
 			tooltip.add(TextUtils.applyFormat(
-					new TranslationTextComponent("gui." + ImmersiveExtras.MODID + ".advanced_comparator.mode." + buttonMode.getState().name() + ".name"),
+					getTranslationComponent("mode." + buttonMode.getState().name() + ".name"),
 					TextFormatting.GRAY
 			));
 			tooltip.add(TextUtils.applyFormat(
-					new TranslationTextComponent("gui." + ImmersiveExtras.MODID + ".advanced_comparator.mode." + buttonMode.getState().name() + ".desc"),
+					getTranslationComponent("mode." + buttonMode.getState().name() + ".desc"),
 					TextFormatting.GRAY, TextFormatting.ITALIC
 			));
 		}

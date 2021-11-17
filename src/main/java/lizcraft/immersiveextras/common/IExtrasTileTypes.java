@@ -7,7 +7,9 @@ import com.google.common.collect.ImmutableSet;
 
 import lizcraft.immersiveextras.ImmersiveExtras;
 import lizcraft.immersiveextras.common.blocks.AdvancedComparatorTileEntity;
+import lizcraft.immersiveextras.common.blocks.RedstoneChannelSwitcherTileEntity;
 import lizcraft.immersiveextras.common.blocks.RedstonePulseCounterTileEntity;
+import lizcraft.immersiveextras.common.blocks.RedstonePulseGeneratorTileEntity;
 import lizcraft.immersiveextras.common.blocks.RedstoneThresholderTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
@@ -24,6 +26,8 @@ public class IExtrasTileTypes
 	public static final RegistryObject<TileEntityType<AdvancedComparatorTileEntity>> ADVANCED_COMPARATOR = REGISTER.register("advancedcomparator", makeType(AdvancedComparatorTileEntity::new, () -> IExtrasContent.advancedComparator));
 	public static final RegistryObject<TileEntityType<RedstoneThresholderTileEntity>> REDSTONE_THRESHOLDER = REGISTER.register("redstonethresholder", makeType(RedstoneThresholderTileEntity::new, () -> IExtrasContent.redstoneThresholder));
 	public static final RegistryObject<TileEntityType<RedstonePulseCounterTileEntity>> REDSTONE_PULSECOUNTER = REGISTER.register("redstonepulsecounter", makeType(RedstonePulseCounterTileEntity::new, () -> IExtrasContent.redstonePulseCounter));
+	public static final RegistryObject<TileEntityType<RedstonePulseGeneratorTileEntity>> REDSTONE_PULSEGENERATOR = REGISTER.register("redstonepulsegenerator", makeType(RedstonePulseGeneratorTileEntity::new, () -> IExtrasContent.redstonePulseGenerator));
+	public static final RegistryObject<TileEntityType<RedstoneChannelSwitcherTileEntity>> REDSTONE_CHANNELSWITCHER = REGISTER.register("redstonechannelswitcher", makeType(RedstoneChannelSwitcherTileEntity::new, () -> IExtrasContent.redstoneChannelSwitcher));
 	
 	private static <T extends TileEntity> Supplier<TileEntityType<T>> makeType(Supplier<T> create, Supplier<Block> valid)
 	{

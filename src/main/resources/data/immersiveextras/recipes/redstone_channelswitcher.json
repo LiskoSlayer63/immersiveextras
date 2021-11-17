@@ -1,8 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "PIP",
-    "RCR",
+    "PTP",
+    "RCI",
 	"PBP"
   ],
   "key": {
@@ -15,14 +15,17 @@
     "C": {
       "item": "minecraft:comparator"
     },
-    "B": {
-      "item": "immersiveengineering:logic_circuit"
+    "T": {
+      "item": "minecraft:redstone_torch"
     },
     "I": {
       "item": "immersiveengineering:connector_bundled"
+    },
+    "B": {
+      "item": "immersiveengineering:logic_circuit"
     }
   },
   "result": {
-    "item": "immersiveextras:advanced_comparator"
+    "item": "immersiveextras:redstone_channelswitcher"
   }
 }

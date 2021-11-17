@@ -2,26 +2,29 @@
   "variants": {
     "facing=east": {
       "model": "immersiveextras:block/advanced_comparator",
+      "x": 90,
       "y": 90
     },
     "facing=north": {
-      "model": "immersiveextras:block/advanced_comparator"
+      "model": "immersiveextras:block/advanced_comparator",
+      "x": 90
     },
     "facing=south": {
       "model": "immersiveextras:block/advanced_comparator",
+      "x": 90,
       "y": 180
     },
     "facing=west": {
       "model": "immersiveextras:block/advanced_comparator",
+      "x": 90,
       "y": 270
     },
     "facing=up": {
-      "model": "immersiveextras:block/advanced_comparator",
-      "x": 270
+      "model": "immersiveextras:block/advanced_comparator"
     },
     "facing=down": {
       "model": "immersiveextras:block/advanced_comparator",
-      "x": 90
+      "x": 180
     }
   }
 }

@@ -16,7 +16,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
 
-public class RedstonePulseCounterBlock extends IExtrasTileBlockBase<RedstonePulseCounterTileEntity>
+public class RedstoneChannelSwitcherBlock extends IExtrasTileBlockBase<RedstoneChannelSwitcherTileEntity>
 {
 	private static final Material material = new Material(MaterialColor.METAL, false, false, true, true, false, false, PushReaction.BLOCK);
     
@@ -27,9 +27,9 @@ public class RedstonePulseCounterBlock extends IExtrasTileBlockBase<RedstonePuls
 	private static final VoxelShape shape_down = Block.box(0D, 5D, 0D, 16D, 16D, 16D);
 	private static final VoxelShape shape_up = Block.box(0D, 0D, 0D, 16D, 11D, 16D);
 	
-	public RedstonePulseCounterBlock() 
+	public RedstoneChannelSwitcherBlock() 
 	{
-		super("redstone_pulsecounter", IExtrasTileTypes.REDSTONE_PULSECOUNTER,
+		super("redstone_channelswitcher", IExtrasTileTypes.REDSTONE_CHANNELSWITCHER,
 				Block.Properties.of(material)
 				.strength(5.0F, 6.0F)
 				.harvestTool(ToolType.PICKAXE)

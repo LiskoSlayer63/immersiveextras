@@ -1,0 +1,104 @@
+{
+  "variants": {
+    "facing=east,rotation=0": {
+      "model": "immersiveextras:block/redstone_channelswitcher",
+      "x": 90,
+	  "y": 90
+    },
+    "facing=north,rotation=0": {
+      "model": "immersiveextras:block/redstone_channelswitcher",
+      "x": 90
+    },
+    "facing=south,rotation=0": {
+      "model": "immersiveextras:block/redstone_channelswitcher",
+      "x": 270
+    },
+    "facing=west,rotation=0": {
+      "model": "immersiveextras:block/redstone_channelswitcher",
+      "x": 90,
+	  "y": 270
+    },
+    "facing=up,rotation=0": {
+      "model": "immersiveextras:block/redstone_channelswitcher"
+    },
+    "facing=down,rotation=0": {
+      "model": "immersiveextras:block/redstone_channelswitcher",
+      "x": 180
+    },
+	"facing=east,rotation=90": {
+      "model": "immersiveextras:block/redstone_channelswitcher_90",
+      "x": 90,
+	  "y": 90
+    },
+    "facing=north,rotation=90": {
+      "model": "immersiveextras:block/redstone_channelswitcher_90",
+      "x": 90
+    },
+    "facing=south,rotation=90": {
+      "model": "immersiveextras:block/redstone_channelswitcher_90",
+      "x": 270
+    },
+    "facing=west,rotation=90": {
+      "model": "immersiveextras:block/redstone_channelswitcher_90",
+      "x": 90,
+	  "y": 270
+    },
+    "facing=up,rotation=90": {
+      "model": "immersiveextras:block/redstone_channelswitcher_90"
+    },
+    "facing=down,rotation=90": {
+      "model": "immersiveextras:block/redstone_channelswitcher_90",
+      "x": 180
+    },
+	"facing=east,rotation=180": {
+      "model": "immersiveextras:block/redstone_channelswitcher_180",
+      "x": 90,
+	  "y": 90
+    },
+    "facing=north,rotation=180": {
+      "model": "immersiveextras:block/redstone_channelswitcher_180",
+      "x": 90
+    },
+    "facing=south,rotation=180": {
+      "model": "immersiveextras:block/redstone_channelswitcher_180",
+      "x": 270
+    },
+    "facing=west,rotation=180": {
+      "model": "immersiveextras:block/redstone_channelswitcher_180",
+      "x": 90,
+	  "y": 270
+    },
+    "facing=up,rotation=180": {
+      "model": "immersiveextras:block/redstone_channelswitcher_180"
+    },
+    "facing=down,rotation=180": {
+      "model": "immersiveextras:block/redstone_channelswitcher_180",
+      "x": 180
+    },
+	"facing=east,rotation=270": {
+      "model": "immersiveextras:block/redstone_channelswitcher_270",
+      "x": 90,
+	  "y": 90
+    },
+    "facing=north,rotation=270": {
+      "model": "immersiveextras:block/redstone_channelswitcher_270",
+      "x": 90
+    },
+    "facing=south,rotation=270": {
+      "model": "immersiveextras:block/redstone_channelswitcher_270",
+      "x": 270
+    },
+    "facing=west,rotation=270": {
+      "model": "immersiveextras:block/redstone_channelswitcher_270",
+      "x": 90,
+	  "y": 270
+    },
+    "facing=up,rotation=270": {
+      "model": "immersiveextras:block/redstone_channelswitcher_270"
+    },
+    "facing=down,rotation=270": {
+      "model": "immersiveextras:block/redstone_channelswitcher_270",
+      "x": 180
+    }
+  }
+}

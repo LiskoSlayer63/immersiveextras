@@ -44,4 +44,9 @@ public class IExtrasContent
 	{
 		return new ResourceLocation(ImmersiveExtras.MODID, "textures/gui/" + name  + ".png");
 	}
+	
+	public static ResourceLocation getResourceLocation(String name)
+	{
+		return new ResourceLocation(ImmersiveExtras.MODID, name);
+	}
 }

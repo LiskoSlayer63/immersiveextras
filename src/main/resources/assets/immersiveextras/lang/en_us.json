@@ -5,6 +5,7 @@
 	"block.immersiveextras.redstone_pulsegenerator": "Redstone Pulse Generator",
 	"block.immersiveextras.redstone_channelswitcher": "Redstone Channel Switcher",
 	
+	"manual.immersiveextras.main": "Redstone Devices",
 	
 	"gui.immersiveextras.advanced_comparator.mode.title": "Comparator Mode",
 	"gui.immersiveextras.advanced_comparator.mode.AVERAGE.name": "Average Mode",

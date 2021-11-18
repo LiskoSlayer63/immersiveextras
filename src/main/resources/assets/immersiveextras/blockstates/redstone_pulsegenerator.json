@@ -17,11 +17,11 @@
     },
     "facing=up": {
       "model": "immersiveextras:block/redstone_pulsegenerator",
-	  "x": 90
+	  "x": 270
     },
     "facing=down": {
       "model": "immersiveextras:block/redstone_pulsegenerator",
-      "x": 270
+      "x": 90
     }
   }
 }

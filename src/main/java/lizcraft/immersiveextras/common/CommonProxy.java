@@ -49,9 +49,4 @@ public class CommonProxy{
 	{
 		return null;
 	}
-	
-	protected static ResourceLocation modLoc(String str)
-	{
-		return new ResourceLocation(ImmersiveExtras.MODID, str);
-	}
 }

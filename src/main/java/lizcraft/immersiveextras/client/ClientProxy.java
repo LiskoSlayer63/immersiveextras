@@ -80,9 +80,6 @@ public class ClientProxy extends CommonProxy
 			Minecraft.getInstance().setScreen(new RedstoneChannelSwitcherScreen((RedstoneChannelSwitcherTileEntity)tileEntity, tileEntity.getBlockState().getBlock().getName()));
 	}
 	
-	/** ImmersiveExtras's Manual Category */
-	//private static InnerNode<ResourceLocation, ManualEntry> IEXTRAS_CATEGORY;
-	
 	@Override
 	public World getClientWorld()
 	{
